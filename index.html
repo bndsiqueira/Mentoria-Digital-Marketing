@@ -1,0 +1,996 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Faça a Primeira Venda Com Acompanhamento</title>
+    <link href="css/tailwind.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #0B0F2B;
+            --bg-shadow: #1B1F3B;
+            --neon-violet: #6C00FF;
+            --neon-blue: #00C2FF;
+            --neon-magenta: #F72585;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: white;
+            overflow-x: hidden;
+        }
+
+        section {
+            position: relative;
+            padding: 6rem 1rem;
+            overflow: hidden;
+        }
+
+        .bg-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.4;
+            z-index: -1;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .highlight {
+            color: var(--neon-violet);
+            font-weight: bold;
+        }
+
+        .highlight-blue {
+            color: var(--neon-blue);
+            font-weight: bold;
+        }
+
+        .highlight-magenta {
+            color: var(--neon-magenta);
+            font-weight: bold;
+        }
+
+        h1 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            line-height: 1.4;
+            margin-bottom: 1.5rem;
+            text-shadow: 0 0 5px rgba(108, 0, 255, 0.3);
+        }
+
+        h2 {
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+            text-shadow: 0 0 5px rgba(108, 0, 255, 0.5);
+        }
+
+        h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        p {
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--neon-violet), var(--neon-magenta));
+            color: white;
+            font-weight: 700;
+            text-transform: uppercase;
+            padding: 1rem 2rem;
+            border-radius: 2rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-size: 1.25rem;
+            box-shadow: 0 0 15px rgba(108, 0, 255, 0.7);
+            text-align: center;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 25px rgba(108, 0, 255, 0.9);
+        }
+
+        .card {
+            background: rgba(27, 31, 59, 0.7);
+            border-radius: 10px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 0 20px rgba(108, 0, 255, 0.3);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(108, 0, 255, 0.2);
+        }
+
+        .benefit-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .benefit-icon {
+            background: var(--neon-violet);
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 1rem;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+
+        .timeline-item {
+            position: relative;
+            padding-left: 2rem;
+            margin-bottom: 1.5rem;
+            border-left: 2px solid var(--neon-violet);
+        }
+
+        .price-box {
+            text-align: center;
+            padding: 2rem;
+            margin: 3rem auto;
+            max-width: 500px;
+            background: rgba(27, 31, 59, 0.8);
+            border-radius: 10px;
+            box-shadow: 0 0 30px rgba(108, 0, 255, 0.5);
+            border: 2px solid var(--neon-magenta);
+        }
+
+        .old-price {
+            text-decoration: line-through;
+            color: #aaa;
+            font-size: 1.5rem;
+        }
+
+        .new-price {
+            font-size: 4rem;
+            font-weight: 900;
+            color: var(--neon-magenta);
+            text-shadow: 0 0 10px rgba(247, 37, 133, 0.7);
+        }
+
+        .countdown-container {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .countdown-box {
+            background: rgba(11, 15, 43, 0.8);
+            padding: 1rem;
+            border-radius: 5px;
+            min-width: 80px;
+            text-align: center;
+            border: 1px solid var(--neon-blue);
+            box-shadow: 0 0 10px rgba(0, 194, 255, 0.5);
+        }
+
+        .countdown-number {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--neon-blue);
+        }
+
+        .countdown-label {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+        }
+
+        .glow-text {
+            text-shadow: 0 0 10px currentColor;
+        }
+
+        .neon-border {
+            position: relative;
+        }
+
+        .neon-border::after {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            border: 2px solid var(--neon-violet);
+            border-radius: 12px;
+            animation: glow 1.5s infinite alternate;
+            z-index: -1;
+        }
+
+        @keyframes glow {
+            0% {
+                box-shadow: 0 0 5px var(--neon-violet);
+            }
+
+            100% {
+                box-shadow: 0 0 20px var(--neon-violet), 0 0 30px var(--neon-magenta);
+            }
+        }
+
+        .bonus-tag {
+            background: var(--neon-magenta);
+            color: white;
+            padding: 0.25rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 700;
+            display: inline-block;
+            margin-bottom: 0.5rem;
+        }
+
+        .guarantee-box {
+            border: 2px dashed var(--neon-blue);
+            padding: 1.5rem;
+            border-radius: 10px;
+            text-align: center;
+            margin: 2rem 0;
+        }
+
+        .vagas-box {
+            background: rgba(247, 37, 133, 0.15);
+            border: 1px solid var(--neon-magenta);
+            padding: 1rem;
+            border-radius: 5px;
+            margin: 1.5rem 0;
+            text-align: center;
+        }
+
+        /* Mobile Responsive Enhancements */
+        @media (max-width: 768px) {
+            section {
+                padding: 3rem 1rem;
+            }
+
+            h1 {
+                font-size: 1.1rem;
+            }
+
+            h2 {
+                font-size: 1.5rem;
+            }
+
+            h3 {
+                font-size: 1.3rem;
+            }
+
+            p {
+                font-size: 1rem;
+            }
+
+            .card {
+                padding: 1.5rem;
+            }
+
+            .cta-button {
+                padding: 0.8rem 1.5rem;
+                font-size: 1rem;
+                width: 100%;
+            }
+
+            .benefit-item {
+                align-items: flex-start;
+            }
+
+            .benefit-icon {
+                margin-top: 2px;
+            }
+
+            .countdown-container {
+                gap: 0.5rem;
+            }
+
+            .countdown-box {
+                padding: 0.8rem;
+                min-width: 70px;
+            }
+
+            .countdown-number {
+                font-size: 1.6rem;
+            }
+
+            .price-box {
+                padding: 1.5rem;
+                margin: 2rem auto;
+            }
+
+            .new-price {
+                font-size: 3rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 1rem;
+            }
+
+            h2 {
+                font-size: 1.3rem;
+            }
+
+            .countdown-box {
+                min-width: 60px;
+                padding: 0.6rem;
+            }
+
+            .countdown-number {
+                font-size: 1.4rem;
+            }
+
+            .card {
+                padding: 1.2rem;
+            }
+        }
+
+        /* Make the subtitle more prominent than the attention text */
+        h2.main-subtitle {
+            font-size: 2.2rem;
+            line-height: 1.3;
+            margin-top: 1.5rem;
+            font-weight: 900;
+            text-shadow: 0 0 15px rgba(0, 194, 255, 0.7);
+        }
+
+        @media (max-width: 768px) {
+            h2.main-subtitle {
+                font-size: 1.6rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h2.main-subtitle {
+                font-size: 1.4rem;
+            }
+        }
+
+        /* Footer Styles */
+        footer {
+            background-color: rgba(11, 15, 43, 0.95);
+            padding: 3rem 1rem;
+            border-top: 1px solid var(--neon-violet);
+            box-shadow: 0 -5px 15px rgba(108, 0, 255, 0.2);
+        }
+
+        .footer-container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .footer-content {
+            font-size: 0.85rem;
+            color: #b0b0b0;
+            line-height: 1.6;
+            text-align: center;
+        }
+
+        .footer-content p {
+            margin-bottom: 1rem;
+            font-size: 0.85rem;
+        }
+
+        .footer-divider {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--neon-blue), transparent);
+            margin: 1.5rem 0;
+            opacity: 0.5;
+        }
+
+        .footer-copyright {
+            font-weight: 600;
+            color: #ffffff;
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-cnpj {
+            font-weight: 600;
+            color: var(--neon-blue);
+            margin-bottom: 1.5rem;
+        }
+
+        @media (max-width: 768px) {
+            footer {
+                padding: 2rem 1rem;
+            }
+
+            .footer-content {
+                font-size: 0.75rem;
+            }
+        }
+    </style>
+
+    <script>
+        window.pixelId = "68312031cd51672a62e305b4";
+        var a = document.createElement("script");
+        a.setAttribute("async", "");
+        a.setAttribute("defer", "");
+        a.setAttribute("src", "https://cdn.utmify.com.br/scripts/pixel/pixel.js");
+        document.head.appendChild(a);
+    </script>
+</head>
+
+<body>
+    <!-- Hero Section -->
+    <section id="hero">
+        <img src="https://page.genspark.site/v1/base64_upload/2400fc11a3b26a038a4af7d01054215c" class="bg-image"
+            alt="Background">
+        <div class="container">
+            <div class="card neon-border">
+                <h1>VOCÊ JÁ DEU O PRIMEIRO PASSO COM O VEO3... E agora tem a oportunidade de <span
+                        class="highlight-magenta">COMEÇAR DO JEITO CERTO — SEM TRAVAR, SEM ERRAR.</span></h1>
+
+                <h2 class="main-subtitle">COMO GARANTIR SEU PRIMEIRO INFOPRODUTO NO AR —
+COM COPY, PÁGINA E ANÚNCIO PRONTOS <span
+                        class="highlight-blue">AINDA ESSA SEMANA.</span> Mesmo sem experiência, sem saber programar, sem aparecer e sem depender da sorte.
+Eu vou te guiar em cada etapa, pra você lançar com confiança, ainda essa semana.</h2>
+
+                <div class="text-center my-10 rounded-lg">
+                    <a href="#pricing" class="cta-button w-full md:w-3/4 lg:w-1/2">QUERO LANÇAR MEU PRODUTO COM AJUDA DE QUEM JÁ FEZ</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Pain Points Section -->
+    <section id="pain-points">
+        <img src="https://page.genspark.site/v1/base64_upload/056448e61b0da48421ec880b9cb06aa6" class="bg-image"
+            alt="Background">
+        <div class="container">
+            <div class="card">
+                <h2>VOCÊ TÁ PRONTO PRA COMEÇAR... MAS AINDA NÃO SABE POR ONDE?</h2>
+
+                <ul class="my-8">
+                    <li class="benefit-item">
+                        <div class="benefit-icon">✗</div>
+                        <div>Comprou o VEO3 porque quer mudar de vida — mas já bateu aquele <span
+                                class="highlight-magenta">MEDO</span> de errar no início?</div>
+
+                    </li>
+                    <li class="benefit-item">
+                        <div class="benefit-icon">✗</div>
+                        <div> Tá animado, mas não quer desperdiçar tempo tentando <span
+                                class="highlight-magenta">ADIVINHAR</span> o que fazer primeiro?</div>
+                    </li>
+
+                    <li class="benefit-item">
+                        <div class="benefit-icon">✗</div>
+                        <div>Tem mil ideias, mas não sabe <span class="highlight-magenta">QUAL PRODUTO</span> escolher, como
+                        <span class="highlight-magenta">MONTAR A PÁGINA</span>, nem por onde <span class="highlight-magenta">COMEÇAR O ANÚNCIO</span>?</div>
+                    </li>
+                    <li class="benefit-item">
+                        <div class="benefit-icon">✗</div>
+                        <div> Sabe que tem potencial, mas sente que <span class="highlight-magenta">COM ALGÚEM GUIANDO O CAMINHO</span> 
+                        , tudo andaria mais rápido e com mais segurança?</div> 
+                    </li>
+                </ul>
+
+                <p class="text-xl"> Se você se identificou com qualquer uma dessas, respira fundo: Você está no momento <span class="highlight-magenta font-bold">PERFEITO</span>
+                    pra não travar, <span class="highlight-magenta font-bold">COMEÇAR CERTO</span> e já construir sua primeira oferta com estrutura profissional <span class="highlight-magenta font-bold">COM ACOMPANHAMENTO COMPLETO</span>.</p>
+
+                <div class="text-center my-10">
+                    <a href="#pricing" class="cta-button w-full md:w-3/4 lg:w-1/2">QUERO APROVEITAR ESSA CHANCE E MONTAR TUDO COM ACOMPANHAMENTO</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Gold Rush Section -->
+    <section id="gold-rush">
+        <img src="https://page.genspark.site/v1/base64_upload/84f132def4bf03234ead059ecfa6a619" class="bg-image"
+            alt="Background">
+        <div class="container">
+            <div class="card">
+                <h2 class="text-center">VOCÊ ACABOU DE ENTRAR NO MELHOR MOMENTO PRA AGIR — ANTES DE TODO MUNDO PERCEBER</h2>
+
+                <p class="text-center text-xl italic">"Enquanto milhares compram o VEO3 e tentam lançar no escuro, você pode ter acompanhamento completo para lançar com estrutura, clareza e velocidade — e colocar seu produto no ar em até 5 dias."</p>
+
+                <p class="text-xl">Existe um grupo pequeno de pessoas quem <span class="highlight">APROVEITAM O VEO3 COM INTELIGÊNCIA:</span> Elas não tentam adivinhar o que funciona. Elas seguem o passo a passo certo, com quem já fez.
+                    <span class="highlight">ENQUANTO MUITOS VÃO SE PERDER NO PROCESSO</span> vôce pode estar entre os primeiros a lucrar.</p>
+
+                <div class="text-center my-10">
+                    <a href="#pricing" class="cta-button w-full md:w-3/4 lg:w-1/2">QUERO COMEÇAR A VENDER COM ACOMPANHAMENTO PASSO A PASSO</a>
+                </div>
+            </div>
+
+            <div class="card mt-16">
+                <h2 class="text-center">POR QUE A MENTORIA É A MELHOR OPÇÃO PRA QUEM ESTÁ COMEÇANDO:</h2>
+
+                <ul class="my-8">
+                    <li class="benefit-item">
+                        <div class="benefit-icon">✓</div>
+                        <div><span class="highlight-blue font-bold">Você não vai precisar adivinhar nada</span> — todo o processo é guiado passo a passo
+                        </div>
+                    </li>
+                    <li class="benefit-item">
+                        <div class="benefit-icon">✓</div>
+                        <div><span class="highlight-blue font-bold"> Montagem completa em 1 dia:</span> produto, página, copy, vídeo e anúncio prontos
+                        </div>
+                    </li>
+                    <li class="benefit-item">
+                        <div class="benefit-icon">✓</div>
+                        <div><span class="highlight-blue font-bold">Evita erros que fazem iniciantes perder tempo e dinheiro </span>com tráfego</div>
+                    </li>
+                    <li class="benefit-item">
+                        <div class="benefit-icon">✓</div>
+                        <div><span class="highlight-blue font-bold">Tira seu projeto do papel em até 5 dias </span> — com estrutura profissional e testada</div>
+                    </li>
+                    <li class="benefit-item">
+                        <div class="benefit-icon">✓</div>
+                        <div><span class="highlight-blue font-bold">Suporte real:</span> grupo no Telegram + gravação da mentoria pra consultar quando quiser
+                        </div>
+                    </li>
+                    </li>
+                    <li class="benefit-item">
+                        <div class="benefit-icon">✓</div>
+                        <div><span class="highlight-blue font-bold">Você aplica o VEO3</span> de forma rápida, prática e com segurança
+                        </div>
+                    </li>
+                </ul>
+
+                <div class="text-center my-10">
+                    <a href="#pricing" class="cta-button w-full md:w-3/4 lg:w-1/2">QUERO LANÇAR MEU PRODUTO COM AJUDA DE QUEM JÁ FEZ</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+  <!-- Mentoria – Plano de Execução -->
+<section id="mentoria-execucao">
+    <img src="https://page.genspark.site/v1/base64_upload/75daf464f7db1263da333b6a978214cf" class="bg-image" alt="Background" />
+
+    <div class="container">
+        <div class="card">
+            <!-- Headline principal -->
+            <h2 class="text-center">O ACESSO QUE VOCÊ VAI TER… ENQUANTO 99% AINDA ESTÃO TRAVADOS</h2>
+
+            <!-- Sub-headline -->
+            <p class="text-xl">
+                Enquanto muita gente compra cursos e fica dias travada tentando adivinhar o próximo passo,
+                <strong>você vai ter um plano de execução completo, com acompanhamento profissional, e um produto no ar em até 5&nbsp;dias.</strong>
+            </p>
+
+            <!-- Benefícios rápidos (checklist) -->
+            <ul class="my-8">
+                <li class="benefit-item"><div class="benefit-icon">✔</div><div>Escolha estratégica de um produto com alta demanda</div></li>
+                <li class="benefit-item"><div class="benefit-icon">✔</div><div>Copy de vendas pronta e validada</div></li>
+                <li class="benefit-item"><div class="benefit-icon">✔</div><div>Página de vendas montada e otimizada</div></li>
+                <li class="benefit-item"><div class="benefit-icon">✔</div><div>Vídeo criativo editado no CapCut que converte</div></li>
+                <li class="benefit-item"><div class="benefit-icon">✔</div><div>Anúncio configurado no Meta Ads com segmentação certeira</div></li>
+                <li class="benefit-item"><div class="benefit-icon">✔</div><div>Gravação completa + suporte no Telegram para dúvidas</div></li>
+            </ul>
+
+            <!-- Plano detalhado (cards) -->
+            <h3 class="text-center mt-12">SEU PLANO DE EXECUÇÃO EM 1&nbsp;SEMANA:</h3>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
+
+                <!-- Card 1 -->
+                <div class="card">
+                    <h4 class="text-lg font-bold highlight-blue">🧠 Escolhendo seu Produto</h4>
+                    <ul class="mt-4">
+                        <li class="mb-2">– Produto com alta procura e fácil entrega</li>
+                        <li class="mb-2">– Estratégia validada para o nicho</li>
+                        <li class="mb-2">– Posicionamento diferenciado</li>
+                    </ul>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="card">
+                    <h4 class="text-lg font-bold highlight">⚙️ Construção da Oferta</h4>
+                    <ul class="mt-4">
+                        <li class="mb-2">– Página com layout profissional</li>
+                        <li class="mb-2">– Copy persuasiva integrada</li>
+                        <li class="mb-2">– Estrutura pensada para escalar</li>
+                    </ul>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="card">
+                    <h4 class="text-lg font-bold highlight-magenta">🎬 Criativos que Vendem</h4>
+                    <ul class="mt-4">
+                        <li class="mb-2">– Roteiro com hooks de retenção</li>
+                        <li class="mb-2">– Edição CapCut vista a vista</li>
+                        <li class="mb-2">– Otimização para Reels/TikTok</li>
+                    </ul>
+                </div>
+
+                <!-- Card 4 -->
+                <div class="card">
+                    <h4 class="text-lg font-bold highlight">🚀 Tráfego & Suporte</h4>
+                    <ul class="mt-4">
+                        <li class="mb-2">– Setup completo no Meta Ads</li>
+                        <li class="mb-2">– Segmentação pronta para teste</li>
+                        <li class="mb-2">– Suporte + gravação da sessão</li>
+                    </ul>
+                </div>
+
+                <!-- Card 5 -->
+                <div class="card">
+                    <h4 class="text-lg font-bold highlight-blue">📦 Estrutura Pronta pra Vender Todo Dia</h4>
+                    <ul class="mt-4">
+                        <li class="mb-2">– Automatização dos passos iniciais</li>
+                        <li class="mb-2">– Modelo de rotina de tráfego</li>
+                        <li class="mb-2">– Templates reutilizáveis para novos lançamentos</li>
+                    </ul>
+                </div>
+
+                <!-- Card 6 -->
+                <div class="card">
+                    <h4 class="text-lg font-bold highlight-magenta">🔎 Análise Pós-Lançamento com Ajustes Reais</h4>
+                    <ul class="mt-4">
+                        <li class="mb-2">– Avaliação do desempenho inicial</li>
+                        <li class="mb-2">– Diagnóstico de erros comuns</li>
+                        <li class="mb-2">– Ações de correção personalizadas</li>
+                    </ul>
+                </div>
+
+            </div>
+
+            <!-- CTA -->
+            <div class="text-center my-10">
+                <a href="#pricing" class="cta-button w-full md:w-3/4 lg:w-1/2">
+                    QUERO LANÇAR MEU PRODUTO COM AJUDA DE QUEM JÁ FEZ
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+   <!-- Course Modules Section -->
+<section id="course-modules">
+    <img src="https://page.genspark.site/v1/base64_upload/056448e61b0da48421ec880b9cb06aa6" class="bg-image"
+        alt="Background">
+    <div class="container">
+        <div class="card">
+            <h2 class="text-center">O QUE VOCÊ VAI APRENDER NA <span class="highlight-blue">MENTORIA PRÁTICA</span></h2>
+            <p class="text-center text-lg mb-12">
+                Uma jornada direta ao ponto, onde você aprende tudo o que precisa para lançar seu infoproduto com estrutura profissional — mesmo sem experiência:
+            </p>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
+
+                <div class="card">
+                    <h4 class="text-lg font-bold highlight">🧠 Escolher um Produto com Potencial</h4>
+                    <p class="mt-2">Aprenda como identificar produtos com demanda, margem e facilidade de entrega.</p>
+                </div>
+
+                <div class="card">
+                    <h4 class="text-lg font-bold highlight-blue">✍️ Criar uma Oferta com Copy que Vende</h4>
+                    <p class="mt-2">Aprenda como usar gatilhos mentais e estruturas profissionais pra transformar seu produto em algo desejado.</p>
+                </div>
+
+                <div class="card">
+                    <h4 class="text-lg font-bold highlight-magenta">🖥️ Montar sua Página de Vendas</h4>
+                    <p class="mt-2">Você vai aprender as ferramentas certas, o layout que funciona e como deixar sua página pronta.</p>
+                </div>
+
+                <div class="card">
+                    <h4 class="text-lg font-bold highlight">🎬 Criar um Vídeo Criativo com CapCut</h4>
+                    <p class="mt-2">Aprenda a editar vídeos no estilo que mais converte pra Reels, TikTok e anúncios.</p>
+                </div>
+
+                <div class="card">
+                    <h4 class="text-lg font-bold highlight-blue">🎯 Configurar Anúncios no Meta Ads</h4>
+                    <p class="mt-2">Aprenda a escolher público, orçamento, criativo e copy certos pra sua campanha dar certo logo de cara.</p>
+                </div>
+
+                <div class="card">
+                    <h4 class="text-lg font-bold highlight-magenta">📊 Analisar e Otimizar Resultados</h4>
+                    <p class="mt-2">Aprenda a identificar o que deu certo, o que precisa ajustar e como evoluir a partir do primeiro teste.</p>
+                </div>
+
+            </div>
+
+            <div class="text-center my-10">
+                <a href="#pricing" class="cta-button w-full md:w-3/4 lg:w-1/2">QUERO APRENDER COM ACOMPANHAMENTO PROFISSIONAL</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Timeline Section -->
+<section id="timeline">
+    <img src="https://page.genspark.site/v1/base64_upload/2400fc11a3b26a038a4af7d01054215c" class="bg-image"
+        alt="Background">
+    <div class="container">
+        <div class="card">
+            <h2 class="text-center">SEU CRONOGRAMA DE FATURAMENTO:</h2>
+
+            <div class="mt-10">
+                <div class="timeline-item">
+                    <h4 class="text-lg font-bold highlight">Dias 1 e 2:</h4>
+                    <p>Escolha do produto, definição da oferta e montagem da estrutura com acompanhamento direto.</p>
+                </div>
+
+                <div class="timeline-item">
+                    <h4 class="text-lg font-bold highlight-blue">Dias 3 a 5</h4>
+                    <p>Página pronta, vídeo editado, anúncio configurado e campanha no ar.</p>
+                </div>
+
+                <div class="timeline-item">
+                    <h4 class="text-lg font-bold highlight">Dias 6 e 7</h4>
+                    <p>Análise dos primeiros resultados e otimizações com meu suporte (caso tenha o bônus).</p>
+                </div>
+
+                <div class="timeline-item">
+                    <h4 class="text-lg font-bold highlight-magenta">Pós Lancamento:</h4>
+                    <p>Produto validado, vendas começando, e plano pronto para escalar com segurança.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- Bonus Section -->
+<section id="bonus">
+    <img src="https://page.genspark.site/v1/base64_upload/25b25873fa3d1265b5215632529aaa2e" class="bg-image"
+        alt="Background">
+    <div class="container">
+        <div class="card">
+            <h2 class="text-center">BÔNUS EXCLUSIVOS PARA AÇÃO IMEDIATA:</h2>
+
+            <p class="text-center text-lg mt-4 mb-8">Esses bônus costumam ser cobrados separadamente — mas você vai receber <span class="highlight-magenta font-bold">100% grátis</span> na mentoria.</p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="card">
+                    <span class="bonus-tag">BÔNUS #1</span>
+                    <h4 class="text-xl font-bold highlight-magenta">Análise Pós-Lançamento Personalizada</h4>
+                    <p>envie seus dados reais e receba feedback direto com sugestões de otimização</p>
+                    <p class="highlight-blue">Valor real: R$197 — incluso gratuitamente</p>
+                </div>
+
+                <div class="card">
+                    <span class="bonus-tag">BÔNUS #2</span>
+                    <h4 class="text-xl font-bold highlight-magenta">Grupo Fechado no Telegram com Suporte</h4>
+                    <p>acompanhe outros alunos e tire dúvidas direto com quem já lançou</p>
+                    <p class="highlight-blue">Valor real: R$237/mês — incluso gratuitamente</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- Mentor Section -->
+<section id="mentor">
+    <img src="https://page.genspark.site/v1/base64_upload/75daf464f7db1263da333b6a978214cf" class="bg-image"
+        alt="Background">
+    <div class="container">
+        <div class="card">
+            <h2 class="text-center mb-10">QUEM É SEU <span class="highlight-blue">MENTOR?</span></h2>
+            <div class="md:flex md:items-start md:space-x-8">
+                <div class="md:w-1/3 text-center mb-6 md:mb-0 flex-shrink-0">
+                    <img src="images/Bernardo Bergamini.png" alt="Bernardo Bergamini"
+                        class="rounded-lg shadow-xl mx-auto w-full max-w-xs">
+                </div>
+                <div class="md:w-2/3">
+                    <h3 class="text-3xl font-bold highlight mb-2">Bernardo Bergamini</h3>
+                    <p class="text-xl font-semibold highlight-magenta mb-6">Especialista em Estratégias de Vendas Digitais</p>
+                    <p class="mb-4 text-lg">Mais de 5 anos de atuação no mercado digital, construí minha metodologia aprendendo com os melhores especialistas em cada etapa: copywriting, tráfego pago, automações, funis, vendas e posicionamento. Essa jornada me permitiu entender o que realmente funciona quando o assunto é lançar produtos digitais que vendem de verdade.</p>
+                    <p class="text-lg">Já testei dezenas de formatos, campanhas e estratégias — e o que ensino aqui é exatamente o que uso nos meus projetos e nos de clientes. Não é uma fórmula engessada: é um plano de execução inteligente, direto ao ponto e que funciona no mundo real.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+
+    <!-- Pricing Section -->
+    <section id="pricing">
+        <img src="https://page.genspark.site/v1/base64_upload/84f132def4bf03234ead059ecfa6a619" class="bg-image"
+            alt="Background">
+        <div class="container">
+            <div class="card">
+                <h2 class="text-center glow-text highlight-magenta">🚨 OFERTA ESPECIAL DE LANÇAMENTO 🚨</h2>
+                <h3 class="text-center">APENAS PARA OS 100 PRIMEIROS ALUNOS!</h3>
+
+                <div class="price-box">
+                    <p class="old-price">De R$497 por apenas:</p>
+                    <p class="new-price">R$50,00</p>
+                    <p>(Preço único de lançamento)</p>
+                </div>
+
+                <div class="vagas-box">
+                    <h4 class="font-bold">VAGAS RESTANTES: <span class="highlight-magenta"
+                            id="vagas-count">44</span>/100</h4>
+                    <p class="text-sm italic">*Após as 100 vagas, o valor sobe para R$200</p>
+                </div>
+
+                <div class="text-center my-10">
+                    <a href="https://pay.kirvano.com/ab353fbb-8cce-45ee-a36e-6c4f68bfc081" class="cta-button w-full md:w-3/4 lg:w-1/2">GARANTIR
+                        MINHA VAGA POR R$50</a>
+                </div>
+
+                <h3 class="text-center mt-16">POR QUE ESSE PREÇO ABSURDO?</h3>
+
+                <p>Simples: quero criar 100 casos de sucesso RÁPIDO para usar como prova social. Você entra por R$50,
+                    fatura R$10.000+ e vira meu case de sucesso. Todo mundo ganha!</p>
+
+                <div class="card mt-10">
+                    <h3 class="text-center">PERGUNTAS DOS CÉTICOS:</h3>
+
+                    <div class="mt-6">
+                        <p class="font-bold">"Mas eu não sei programar..."</p>
+                        <p class="ml-4">ÓTIMO! 90% dos meus alunos que mais faturam não sabiam.</p>
+
+                        <p class="font-bold mt-4">"O mercado não vai saturar?"</p>
+                        <p class="ml-4">Existem 30 MILHÕES de empresas no Brasil. Falta gente, não cliente.</p>
+
+                        <p class="font-bold mt-4">"E se eu não conseguir vender?"</p>
+                        <p class="ml-4">Impossível! Te dou os produtos, copys e estratégia de trafego prontos.</p>
+                    </div>
+                </div>
+
+                <div class="mt-16">
+                    <h3 class="text-center highlight-magenta glow-text">🚨 ALERTA: PREÇO AUMENTA EM...</h3>
+
+                    <div class="countdown-container">
+                        <div class="countdown-box">
+                            <div id="hours" class="countdown-number">03</div>
+                            <div class="countdown-label">horas</div>
+                        </div>
+                        <div class="countdown-box">
+                            <div id="minutes" class="countdown-number">47</div>
+                            <div class="countdown-label">minutos</div>
+                        </div>
+                        <div class="countdown-box">
+                            <div id="seconds" class="countdown-number">22</div>
+                            <div class="countdown-label">segundos</div>
+                        </div>
+                    </div>
+
+                    <p class="text-center mt-6">Quando o timer zerar, o valor vai para R$200.<br>Não perca essa
+                        oportunidade única!</p>
+                </div>
+
+                <div class="text-center my-10">
+                    <a href="https://pay.kirvano.com/ab353fbb-8cce-45ee-a36e-6c4f68bfc081" class="cta-button w-full md:w-3/4 lg:w-1/2">QUERO
+                        APROVEITAR POR R$50</a>
+                </div>
+
+                <div class="guarantee-box">
+                    <p class="font-bold">Garantia total de 7 dias. Teste sem risco algum.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Section -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-content">
+                <p class="footer-copyright">© 2025 InfoPrime Marketing Digital LTDA. Todos os Direitos Reservados</p>
+
+                <div class="footer-divider"></div>
+
+                <p>Este site não é afiliado ao Facebook ou a qualquer entidade do Facebook. Depois de sair do Facebook,
+                    a responsabilidade não recai sobre eles, mas sim sobre o nosso site. Não vendemos seu e-mail ou
+                    qualquer outra informação a terceiros. Nunca enviamos nenhum tipo de spam.</p>
+
+                <div class="footer-divider"></div>
+
+                <p>Caso tenha alguma dúvida, não hesite em entrar em contato conosco em
+                    horário comercial, de segunda a sexta, das 09h00 às 17h00. Lemos e respondemos todas as mensagens
+                    por ordem de chegada no e-mail berber0508@hotmail.com</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Countdown Timer
+        function updateCountdown() {
+            const hours = document.getElementById('hours');
+            const minutes = document.getElementById('minutes');
+            const seconds = document.getElementById('seconds');
+
+            let h = parseInt(hours.innerText);
+            let m = parseInt(minutes.innerText);
+            let s = parseInt(seconds.innerText);
+
+            s = s - 1;
+
+            if (s < 0) {
+                s = 59;
+                m = m - 1;
+
+                if (m < 0) {
+                    m = 59;
+                    h = h - 1;
+
+                    if (h < 0) {
+                        h = 3;
+                        m = 47;
+                        s = 22;
+                    }
+                }
+            }
+
+            hours.innerText = h.toString().padStart(2, '0');
+            minutes.innerText = m.toString().padStart(2, '0');
+            seconds.innerText = s.toString().padStart(2, '0');
+        }
+
+        // Update countdown every second
+        setInterval(updateCountdown, 1000);
+
+        // Vagas counter random decrease
+        setInterval(function () {
+            const vagasCount = document.getElementById('vagas-count');
+            let vagas = parseInt(vagasCount.innerText);
+
+            // 10% chance of decreasing the counter
+            if (Math.random() < 0.1 && vagas > 1) {
+                vagas--;
+                vagasCount.innerText = vagas;
+            }
+        }, 30000); // Check every 30 seconds
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+
+                document.querySelector(targetId).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+
+    <script>
+        window.pixelId = "6827b54b175baaf6b2212091";
+        var a = document.createElement("script");
+        a.setAttribute("async", "");
+        a.setAttribute("defer", "");
+        a.setAttribute("src", "https://cdn.utmify.com.br/scripts/pixel/pixel.js");
+        document.head.appendChild(a);
+    </script>
+
+    <script src="js/latest.js" data-utmify-prevent-xcod-sck="" data-utmify-prevent-subids="" async="" defer=""></script>
+
+
+</body>
+
+</html>
